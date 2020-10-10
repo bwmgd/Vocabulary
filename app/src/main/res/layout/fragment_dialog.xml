@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             tools:context=".DialogFragment"
+             tools:ignore="LabelFor">
+
+    <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+        <TextView
+                android:text="@string/word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wordText"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:labelFor="@id/wordText"
+                android:id="@+id/wordEdit"
+                android:contentDescription="@string/word"
+                android:inputType="text"
+                android:importantForAutofill="no"
+        />
+    </TableRow>
+    <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+        <TextView
+                android:text="@string/mean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/meanText"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/meanEdit"
+                android:contentDescription="@string/mean"
+                android:inputType="text"
+                android:importantForAutofill="no"/>
+    </TableRow>
+    <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+        <TextView
+                android:text="@string/eg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/egText"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/egEdit"
+                android:contentDescription="@string/eg"
+                android:inputType="text"
+                android:importantForAutofill="no"/>
+    </TableRow>
+    <Button
+            android:text="@string/web"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btWeb"
+            android:layout_margin="5dp"/>
+</TableLayout>
