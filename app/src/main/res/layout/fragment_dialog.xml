@@ -3,10 +3,12 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             tools:context=".DialogFragment"
-             tools:ignore="LabelFor">
+             tools:context=".AddWordDialog"
+             tools:ignore="LabelFor"
+             android:padding="10dp">
 
-    <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+    <TableRow android:layout_width="match_parent"
+              android:layout_height="match_parent">
         <TextView
                 android:text="@string/word"
                 android:layout_width="wrap_content"
@@ -48,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:id="@+id/egEdit"
+                android:id="@+id/sampleEdit"
                 android:contentDescription="@string/eg"
                 android:inputType="text"
                 android:importantForAutofill="no"/>
@@ -59,4 +61,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/btWeb"
             android:layout_margin="5dp"/>
+    <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <Button
+                android:text="@string/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/btCancel" tools:ignore="ButtonStyle"/>
+        <Button
+                android:text="@string/yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/btYes" tools:ignore="ButtonStyle"/>
+    </TableRow>
 </TableLayout>

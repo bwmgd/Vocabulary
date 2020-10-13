@@ -6,21 +6,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.example.vocabulary.domain.WordsContent;
 
-import com.example.vocabulary.dummy.DummyContent.DummyItem;
-
-import java.util.List;
+import java.util.ArrayList;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
+ * {@link RecyclerView.Adapter} that can display a {@link WordsContent}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final ArrayList<WordsContent.Word> mValues;
 
-    public MyItemRecyclerViewAdapter(List<DummyItem> items) {
-        mValues = items;
+
+    public MyItemRecyclerViewAdapter(ArrayList<WordsContent.Word> items) {
+        if (items.isEmpty()) {
+            WordsContent.Word word = new WordsContent.Word();
+            word.setId(-1);
+            word.setWord("暂无单词");
+            word.setMeaning("");
+            ArrayList<WordsContent.Word> words = new ArrayList<>();
+            words.add(word);
+            mValues = words;
+        }
+        else mValues = items;
     }
 
     @NonNull
@@ -33,9 +42,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.word = mValues.get(position);
+        holder.mWordView.setText(mValues.get(position).getWord());
+        holder.mMeaningView.setText(mValues.get(position).getMeaning());
     }
 
     @Override
@@ -45,21 +54,21 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView mWordView;
+        public final TextView mMeaningView;
+        public WordsContent.Word word;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = view.findViewById(R.id.item_number);
-            mContentView = view.findViewById(R.id.content);
+            mWordView = view.findViewById(R.id.item_word);
+            mMeaningView = view.findViewById(R.id.item_meaning);
         }
 
         @NonNull
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mMeaningView.getText() + "'";
         }
     }
 }

@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.vocabulary.dummy.Words;
+import com.example.vocabulary.domain.WordsContent;
 
 public class WordsDBHelper extends SQLiteOpenHelper {
 
@@ -13,14 +13,14 @@ public class WordsDBHelper extends SQLiteOpenHelper {
     private final static int DATABASE_VERSION = 1;//数据库版本
     //建表语句
     private final static String SQL_CREATE_DATABASE = "CREATE TABLE "
-            + Words.Word.TABLE_NAME + " (" +
-            Words.Word._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-            Words.Word.COLUMN_NAME_WORD + " TEXT" + "," +
-            Words.Word.COLUMN_NAME_MEANING + " TEXT" + ","
-            + Words.Word.COLUMN_NAME_SAMPLE + " TEXT" + " )";
+            + WordsContent.WordBase.TABLE_NAME + " (" +
+            WordsContent.WordBase._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            WordsContent.WordBase.COLUMN_NAME_WORD + " TEXT" + "," +
+            WordsContent.WordBase.COLUMN_NAME_MEANING + " TEXT" + ","
+            + WordsContent.WordBase.COLUMN_NAME_SAMPLE + " TEXT" + " )";
 
     //删表语句
-    private final static String SQL_DELETE_DATABASE = "DROP TABLE IF EXISTS " + Words.Word.TABLE_NAME;
+    private final static String SQL_DELETE_DATABASE = "DROP TABLE IF EXISTS " + WordsContent.WordBase.TABLE_NAME;
 
 
     public WordsDBHelper(Context context) {

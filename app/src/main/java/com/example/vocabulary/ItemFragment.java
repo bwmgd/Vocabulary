@@ -2,14 +2,17 @@ package com.example.vocabulary;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import com.example.vocabulary.dummy.DummyContent;
+import com.example.vocabulary.domain.WordsContent;
+import com.example.vocabulary.sqlite.OperationDB;
+
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
@@ -20,6 +23,9 @@ public class ItemFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
+
+    private final OperationDB operationDB = OperationDB.getInstance();
+    RecyclerView recyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -41,7 +47,6 @@ public class ItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -55,15 +60,17 @@ public class ItemFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            }
-            else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS));
+            recyclerView = (RecyclerView) view;
+            if (mColumnCount <= 1) recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            else recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            //获取单词列表
+            refresh();
         }
         return view;
+    }
+
+    public void refresh() {
+        ArrayList<WordsContent.Word> items = operationDB.getAllWord();
+        recyclerView.setAdapter(new MyItemRecyclerViewAdapter(items));
     }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Android SQLite" uuid="1723da16-67cb-4ef7-8fb1-16aa33d985fb">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\19711\AppData\Local\JetBrains\IntelliJIdea2020.2\android\databases\SERIAL_NUMBER_60ded0a7\com.example.vocabulary\internal\wordsDB</jdbc-url>
+    </data-source>
+  </component>
+</project>
