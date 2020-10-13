@@ -22,7 +22,7 @@
     <fragment android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:id="@+id/listFragment"
-              android:name="com.example.vocabulary.ItemFragment"
+              android:name="com.example.vocabulary.ListFragment"
               tools:layout="@layout/fragment_item_list"
               android:layout_marginTop="?attr/actionBarSize"
               android:layout_marginStart="20dp"

@@ -24,7 +24,7 @@
             android:layout_height="match_parent" android:baselineAligned="false">
         <fragment
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:name="com.example.vocabulary.ItemFragment"
+                android:layout_height="match_parent" android:name="com.example.vocabulary.ListFragment"
                 android:id="@+id/fragment" android:layout_weight="1" tools:layout="@layout/fragment_item_list"/>
         <fragment
                 android:layout_width="match_parent"

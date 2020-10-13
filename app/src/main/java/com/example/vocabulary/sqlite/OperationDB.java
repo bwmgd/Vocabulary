@@ -19,10 +19,6 @@ public class OperationDB implements OperationInterface {
         return OperationDB.ins;
     }
 
-    public void close() {
-        if (helper != null) helper.close();
-    }
-
     OperationDB() {
         if (helper == null) helper = new WordsDBHelper(WordsApplication.getContext());
     }
@@ -90,5 +86,10 @@ public class OperationDB implements OperationInterface {
         sql = "select * from words where word like ? order by word desc";
         cursor = database.rawQuery(sql, new String[]{"%" + searchStr + "%"});
         return convertCursorToWordList(cursor);
+    }
+
+    @Override
+    public void clear() {
+        helper.onUpgrade(database, 1, 1);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.vocabulary.domain;
 
+import android.util.Log;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.exception.TencentCloudSDKException;
 import com.tencentcloudapi.common.profile.ClientProfile;
@@ -28,6 +29,7 @@ public class Translation {
             req.setTarget("zh");
             req.setProjectId(1259310028L);
             TextTranslateResponse resp = client.TextTranslate(req);
+            Log.v("translation",resp.getTargetText());
             return resp.getTargetText();
         } catch (TencentCloudSDKException e) {
             System.out.println(e.toString());

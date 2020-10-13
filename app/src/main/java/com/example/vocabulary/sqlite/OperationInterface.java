@@ -19,4 +19,6 @@ public interface OperationInterface {
     void update(String id, String word, String meaning, String sample); //更新单词
 
     ArrayList<WordsContent.Word> search(String searchStr); //搜索
+
+    void clear();
 }
