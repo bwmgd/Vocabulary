@@ -12,3 +12,8 @@
 /captures
 .externalNativeBuild
 .cxx
+.jks
+.idea/dataSources/
+app/debug/
+app/libs/
+key.jks

@@ -3,15 +3,33 @@ package com.example.vocabulary.domain;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+import java.io.Serializable;
+
+
 public class WordsContent {
-    public static class Word {
-        public int id;
-        public String word;
-        public String meaning;
-        public String sample;
+    public static class Word implements Serializable {
+        private String word;
+        private String meaning;
+        private String sample;
+        private int id;
+        private int newWord;
+
+        public Word() {
+        }
+
+        public Word(String word, String meaning, String sample, int newWord) {
+            this.word = word;
+            this.meaning = meaning;
+            this.sample = sample;
+            this.newWord = newWord;
+        }
 
         public int getId() {
             return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
         }
 
         public String getWord() {
@@ -38,8 +56,12 @@ public class WordsContent {
             this.word = word;
         }
 
-        public void setId(int id) {
-            this.id = id;
+        public boolean isNewWord() {
+            return newWord == 1;
+        }
+
+        public void setNewWord(int newWord) {
+            this.newWord = newWord;
         }
     }
 
@@ -49,9 +71,11 @@ public class WordsContent {
 
         public static final String TABLE_NAME = "words";//表名
         // _ID字段：主键，从接口BaseColumn而来
+
         public static final String COLUMN_NAME_WORD = "word";//字段：单词
         public static final String COLUMN_NAME_MEANING = "meaning";//字段：单词含义
         public static final String COLUMN_NAME_SAMPLE = "sample";//字段：单词示例
+        public static final String COLUMN_NAME_NEW_WORD = "newWord";//字段：生词
 
         //MIME类型
         public static final String MIME_DIR_PREFIX = "vnd.android.cursor.dir";

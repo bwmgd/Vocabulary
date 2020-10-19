@@ -12,13 +12,17 @@ public interface OperationInterface {
 
     ArrayList<WordsContent.Word> getAllWord(); //获取全部单词
 
-    void insert(String word, String meaning, String sample); //插入单词
+    int insert(String word, String meaning, String sample, int newWordFlag); //插入单词
 
-    void delete(String id); //删除单词
+    void delete(int id); //删除单词
 
-    void update(String id, String word, String meaning, String sample); //更新单词
+    void update(int id, String word, String meaning, String sample); //更新单词
+
+    void addNewWord(int newWordFlag, int id); //生词本标志
 
     ArrayList<WordsContent.Word> search(String searchStr); //搜索
 
-    void clear();
+    void clear();//清空
+
+    ArrayList<WordsContent.Word> getAllNewWords();
 }

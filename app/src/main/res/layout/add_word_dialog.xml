@@ -3,7 +3,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             tools:context=".AddWordDialog"
+             tools:context=".ui.main.AddWordDialog"
              tools:ignore="LabelFor"
              android:padding="10dp">
 

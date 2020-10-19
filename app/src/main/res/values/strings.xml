@@ -2,7 +2,7 @@
     <string name="app_name">Vocabulary</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="autoFill">TextView</string>
+    <string name="autoFill">Somethings</string>
     <string name="glossary">生词本</string>
     <string name="news">获取新闻</string>
     <string name="search">搜索单词</string>
@@ -17,4 +17,8 @@
     <string name="cancel">取消</string>
     <string name="yes">确定</string>
     <string name="clear">清空</string>
+    <string name="show_all">显示全部</string>
+    <string name="star">start</string>
+    <string name="translation">翻译:</string>
+    <string name="sample">样例:</string>
 </resources>

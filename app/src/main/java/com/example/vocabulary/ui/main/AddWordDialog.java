@@ -1,4 +1,4 @@
-package com.example.vocabulary;
+package com.example.vocabulary.ui.main;
 
 
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import com.example.vocabulary.R;
+import com.example.vocabulary.WordsApplication;
 import com.example.vocabulary.domain.Translation;
 
 public class AddWordDialog extends Fragment {
@@ -35,7 +37,7 @@ public class AddWordDialog extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_dialog, container, false);
+        final View view = inflater.inflate(R.layout.add_word_dialog, container, false);
         wordEdit = view.findViewById(R.id.wordEdit);
         meanEdit = view.findViewById(R.id.meanEdit);
         sampleEdit = view.findViewById(R.id.sampleEdit);
@@ -51,33 +53,42 @@ public class AddWordDialog extends Fragment {
                             String s = (String) msg.obj;
                             Log.v("getWord", s);
                             meanEdit.setText(s);
-                        }catch (NullPointerException e){
+                        } catch (NullPointerException e) {
                             Toast.makeText(WordsApplication.getContext(), "无网络连接", Toast.LENGTH_LONG).show();
                         }
                     }
                 };
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Message message = new Message();
-                        message.obj = Translation.translation(wordEdit.getText().toString());
-                        handler.sendMessage(message);
-                    }
+                new Thread(() -> {
+                    Message message = new Message();
+                    message.obj = Translation.translation(wordEdit.getText().toString());
+                    handler.sendMessage(message);
                 }).start();
             }
         });
         return view;
     }
 
-    public EditText getWordEdit() {
-        return wordEdit;
+    public String getWordStr() {
+        return wordEdit.getText().toString().trim();
     }
 
-    public EditText getMeanEdit() {
-        return meanEdit;
+    public void setWordStr(String wordStr) {
+        this.wordEdit.setText(wordStr);
     }
 
-    public EditText getSampleEdit() {
-        return sampleEdit;
+    public String getMeanStr() {
+        return meanEdit.getText().toString().trim();
+    }
+
+    public void setMeanStr(String meanStr) {
+        this.meanEdit.setText(meanStr);
+    }
+
+    public String getSampleStr() {
+        return sampleEdit.getText().toString().trim();
+    }
+
+    public void setSampleStr(String sampleStr) {
+        this.sampleEdit.setText(sampleStr);
     }
 }
