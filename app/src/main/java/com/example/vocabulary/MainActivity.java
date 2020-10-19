@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -52,21 +53,25 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         recyclerView = (RecyclerView) wordListFragment.getView();
         //搜索框初始化
         searchViewInit();
-        listenerAdd();
-    }
-
-    private void listenerAdd() {
-        WordRecyclerViewAdapter viewAdapter = (WordRecyclerViewAdapter) recyclerView.getAdapter();
-        assert viewAdapter != null;
-        viewAdapter.setMListener(view -> {
-            WordsContent.Word word = viewAdapter.getItem(recyclerView.getChildAdapterPosition(view));
-            if (isLand()) {
-                ((WordDetailFragment) Objects.requireNonNull(fragmentManager.findFragmentById(R.id.detailFragment))).setWord(word);
+        recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+            @Override
+            public void onChildViewAttachedToWindow(@NonNull View view) {
+                final RecyclerView.ViewHolder viewHolder = recyclerView.getChildViewHolder(view);
+                view.setOnClickListener(v -> {
+                    WordsContent.Word word = ((WordRecyclerViewAdapter.WordViewHolder) viewHolder).getWord();
+                    if (isLand()) {
+                        ((WordDetailFragment) Objects.requireNonNull(fragmentManager.findFragmentById(R.id.detailFragment))).setWord(word);
+                    }
+                    else {
+                        Intent intent = new Intent(MainActivity.this, WordActivity.class);
+                        intent.putExtra("word", word);
+                        startActivity(intent);
+                    }
+                });
             }
-            else {
-                Intent intent = new Intent(MainActivity.this, WordActivity.class);
-                intent.putExtra("word", word);
-                startActivity(intent);
+
+            @Override
+            public void onChildViewDetachedFromWindow(@NonNull View view) {
             }
         });
     }

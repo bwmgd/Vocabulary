@@ -67,8 +67,6 @@ public class WordListFragment extends Fragment {
 
     public void refresh(ArrayList<WordsContent.Word> items) {
         viewAdapter = new WordRecyclerViewAdapter(items);
-        viewAdapter.setHasStableIds(true);
-        viewAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(items.isEmpty() ? WordRecyclerViewAdapter.emptyWordAdapter() : viewAdapter);
     }
 

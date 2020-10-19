@@ -19,16 +19,17 @@ import java.util.Objects;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link WordsContent}.
  */
-public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerViewAdapter.ViewHolder> {
+public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerViewAdapter.WordViewHolder> {
 
     public static final String Tag = "WordRecyclerViewAdapter";
-    private static OnItemClickListener mListener;
     private final ArrayList<WordsContent.Word> mValues;
     private final Map<Integer, ImageView> viewMap;
+    private final Map<Integer, WordsContent.Word> wordMap;
     private int mPosition = -1;
 
     public WordRecyclerViewAdapter(ArrayList<WordsContent.Word> items) {
         mValues = items;
+        wordMap = new HashMap<>();
         viewMap = new HashMap<>();
     }
 
@@ -70,37 +71,44 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
     }
 
     public WordsContent.Word getItem(int position) {
-        return mValues.get(position);
+        Log.v("position", position + ",mapSize:" + wordMap.size());
+        WordsContent.Word word = wordMap.get(position);
+        assert word != null;
+        Log.v("getItem", word.getId() + word.getWord());
+        return word;
     }
 
     public void newWord(int position) {
         Objects.requireNonNull(viewMap.get(position)).setVisibility(
                 Objects.requireNonNull(viewMap.get(position)).getVisibility() ==
                         View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
+        getItem(position).setNewWord(getItem(position).isNewWord() ? 0 : 1);
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.word_item, parent, false);
-        return new ViewHolder(view);
+        return new WordViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final WordViewHolder holder, int position) {
         holder.word = mValues.get(position);
         holder.mWordView.setText(mValues.get(position).getWord());
         holder.mMeaningView.setText(mValues.get(position).getMeaning());
+        holder.itemView.setClickable(true);
         holder.itemView.setLongClickable(true);
         holder.itemView.setOnLongClickListener(v -> {
             mPosition = holder.getAdapterPosition();
             return false;
         });
-        holder.itemView.setClickable(true);
-        holder.itemView.setOnClickListener(v -> mListener.onItemClick(v));
         if (holder.word.isNewWord()) holder.mImageView.setVisibility(View.VISIBLE);
         viewMap.put(position, holder.mImageView);
+        wordMap.put(position, holder.word);
+        Log.v("BindViewHolder", "word:" + holder.word.getId() + holder.word.getWord()
+                + ",position:" + mPosition + ",mapSize:" + wordMap.size());
     }
 
     @Override
@@ -108,27 +116,24 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
         return mValues.size();
     }
 
-    public void setMListener(OnItemClickListener mListener) {
-        WordRecyclerViewAdapter.mListener = mListener;
-    }
 
-    public interface OnItemClickListener {
-        void onItemClick(View view);
-    }
-
-    protected static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class WordViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mWordView;
         public final TextView mMeaningView;
         public final ImageView mImageView;
         public WordsContent.Word word;
 
-        public ViewHolder(View view) {
+        public WordViewHolder(View view) {
             super(view);
             mView = view;
             mWordView = view.findViewById(R.id.item_word);
             mMeaningView = view.findViewById(R.id.item_meaning);
             mImageView = view.findViewById(R.id.startImageView);
+        }
+
+        public WordsContent.Word getWord() {
+            return word;
         }
 
         @NonNull
