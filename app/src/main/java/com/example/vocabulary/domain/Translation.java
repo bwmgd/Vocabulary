@@ -12,7 +12,7 @@ import com.tencentcloudapi.tmt.v20180321.models.TextTranslateResponse;
 public class Translation {
     public static String translation(String word) {
         try {
-            Credential cred = new Credential("AKIDyibDZlmMJzSlnYHmAgwzB6l9CrRYvyGR", "5engZjiZJqzyklm4dx59oDlCMGyHRM13");
+            Credential cred = new Credential(" ", " "); //腾讯云api项目id和密钥
 
             HttpProfile httpProfile = new HttpProfile();
             httpProfile.setEndpoint("tmt.tencentcloudapi.com");
