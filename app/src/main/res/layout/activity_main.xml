@@ -37,6 +37,6 @@
                   android:id="@+id/listFragment"
                   android:name="com.example.vocabulary.ui.main.WordListFragment"
                   tools:layout="@layout/word_item_list"
-        />
+                  tools:ignore="FragmentTagUsage"/>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

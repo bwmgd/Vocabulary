@@ -117,19 +117,20 @@ public class WordListFragment extends Fragment {
 
     private void update(final WordsContent.Word word) {
         final AddWordDialog wordDialog = new AddWordDialog();
-        wordDialog.setWordStr(word.getWord());
-        wordDialog.setMeanStr(word.getMeaning());
-        wordDialog.setSampleStr(word.getSample());
-        new AlertDialog.Builder(WordsApplication.getContext()).setView(wordDialog.onCreateView(getLayoutInflater(), null,
+        new AlertDialog.Builder(Objects.requireNonNull(getActivity())).setView(wordDialog.onCreateView(getLayoutInflater(), null,
                 null)).setTitle("修改单词").setNegativeButton("取消", null).setPositiveButton("确定",
                 (dialog, which) -> {
                     if (wordDialog.getWordStr().isEmpty() || wordDialog.getMeanStr().isEmpty()) {
                         Toast.makeText(WordsApplication.getContext(), "请输入单词及词义", Toast.LENGTH_LONG).show();
                     }
                     else {
-                        operationDB.update(word.getId(), word.getWord(), word.getMeaning(), word.getSample());
+                        operationDB.update(word.getId(), wordDialog.getWordStr(), wordDialog.getMeanStr(),
+                                wordDialog.getSampleStr());
                         viewAdapter.notifyDataSetChanged();
                     }
                 }).create().show();
+        wordDialog.setWordStr(word.getWord());
+        wordDialog.setMeanStr(word.getMeaning());
+        wordDialog.setSampleStr(word.getSample());
     }
 }

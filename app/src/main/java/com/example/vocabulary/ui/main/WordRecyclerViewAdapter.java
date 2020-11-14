@@ -118,7 +118,6 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
 
 
     public static class WordViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
         public final TextView mWordView;
         public final TextView mMeaningView;
         public final ImageView mImageView;
@@ -126,7 +125,6 @@ public class WordRecyclerViewAdapter extends RecyclerView.Adapter<WordRecyclerVi
 
         public WordViewHolder(View view) {
             super(view);
-            mView = view;
             mWordView = view.findViewById(R.id.item_word);
             mMeaningView = view.findViewById(R.id.item_meaning);
             mImageView = view.findViewById(R.id.startImageView);

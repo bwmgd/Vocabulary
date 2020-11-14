@@ -5,6 +5,7 @@
 
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <permission android:name="com.example.vocabulary.Words.READ" android:protectionLevel="normal"/>
     <application
             android:name=".WordsApplication"
             android:allowBackup="true"
@@ -22,9 +23,9 @@
 
         <provider
                 android:name=".sqlite.WordsProvider"
-                android:authorities="com.example.vocabulary.sqlite.wordsprovider"
-                android:enabled="true"
-                android:exported="false">
+                android:authorities="com.example.vocabulary.Words"
+                android:readPermission="com.example.vocabulary.Words.READ"
+                android:exported="true">
         </provider>
 
         <activity android:name=".MainActivity">

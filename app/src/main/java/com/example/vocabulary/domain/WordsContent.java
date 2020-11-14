@@ -65,7 +65,7 @@ public class WordsContent {
         }
     }
 
-    public static final String AUTHORITY = "com.example.vocabulary.domain.Words";//URI授权
+    public static final String AUTHORITY = "com.example.vocabulary.Words";//URI授权
 
     public static abstract class WordBase implements BaseColumns {
 

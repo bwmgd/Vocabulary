@@ -19,7 +19,7 @@ public class OperationDB implements OperationInterface {
         return OperationDB.ins;
     }
 
-    OperationDB() {
+    private OperationDB() {
         if (helper == null) helper = new WordsDBHelper(WordsApplication.getContext());
     }
 
