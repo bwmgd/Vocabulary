@@ -23,24 +23,12 @@ public class OperationDB implements OperationInterface {
         if (helper == null) helper = new WordsDBHelper(WordsApplication.getContext());
     }
 
-    @Override
-    public ArrayList<WordsContent.Word> convertCursorToWordList(Cursor cursor) {
+    private ArrayList<WordsContent.Word> convertCursorToWordList(Cursor cursor) {
         ArrayList<WordsContent.Word> list = new ArrayList<>();
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             list.add(makeWord(cursor));
         }
         return list;
-    }
-
-    @Override
-    public WordsContent.Word getWord(int id) {
-        database = helper.getReadableDatabase();
-        sql = "select * from words where _id = ?";
-        cursor = database.rawQuery(sql, new String[]{String.valueOf(id)});
-        if (cursor.moveToFirst()) {
-            return makeWord(cursor);
-        }
-        throw new IllegalArgumentException();
     }
 
     private WordsContent.Word makeWord(Cursor cursor) {
